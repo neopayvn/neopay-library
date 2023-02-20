@@ -1,0 +1,115 @@
+{
+  "SUCCESS": {
+    "CODE": 1,
+    "MESSAGE": {
+      "VI": "Thành công",
+      "EN": "Successful"
+    }
+  },
+  "FAILED": {
+    "CODE": 2,
+    "MESSAGE": {
+      "VI": "Thất bại",
+      "EN": "Process failed"
+    }
+  },
+  "PROCESSING": {
+    "CODE": 3,
+    "MESSAGE": {
+      "VI": "Đang xử lý",
+      "EN": "Processing"
+    }
+  },
+  "MISSING_PARAM": {
+    "CODE": 1000,
+    "MESSAGE": {
+      "VI": "Thiếu tham số",
+      "EN": "MISSING PARAM"
+    },
+    "STATUS_CODE": 400
+  },
+  "PARAMS_INVALID_FORMAT": {
+    "CODE": 1001,
+    "MESSAGE": {
+      "VI": "Tham số sai định dạng",
+      "EN": "PARAMS INVALID FORMAT"
+    }
+  },
+  "ITEM_NOT_FOUND": {
+    "CODE": 1002,
+    "MESSAGE": {
+      "VI": "Không tìm thấy dữ liệu",
+      "EN": "ITEM NOT FOUND"
+    }
+  },
+  "EXISTED": {
+    "CODE": 1003,
+    "MESSAGE": {
+      "VI": "Dữ liệu đã tồn tại",
+      "EN": "EXISTED DATA"
+    }
+  },
+  "SAVING_FAILED": {
+    "CODE": 1004,
+    "MESSAGE": {
+      "VI": "Lưu dữ liệu không thành công!",
+      "EN": "SAVING FAILED"
+    }
+  },
+  "LOGIN_FAILED": {
+    "CODE": 1005,
+    "MESSAGE": {
+      "VI": "Mật khẩu không đúng. Vui lòng thử lại",
+      "EN": "Incorrect password. Please try again"
+    }
+  },
+  "PASSWORD_POLICY_INVALID": {
+    "CODE": 1006,
+    "MESSAGE": {
+      "VI": "Mật khẩu không đúng yêu cầu!",
+      "EN": "Password policy is invalid!"
+    }
+  },
+  "RESET_PASSWORD_TOKEN_EXPIRED": {
+    "CODE": 1007,
+    "MESSAGE": {
+      "VI": "Token reset mật khẩu đã hết hạn!",
+      "EN": "Reset password token is expired!"
+    }
+  },
+  "TOKEN_EXPIRED": {
+    "CODE": 1008,
+    "MESSAGE": {
+      "VI": "Phiên làm việc hết hạn",
+      "EN": "TOKEN_EXPIRED"
+    }
+  },
+  "USER_NOT_FOUND": {
+    "CODE": 1009,
+    "MESSAGE": {
+      "VI": "Người dùng không tồn tại!",
+      "EN": "User not found!"
+    }
+  },
+  "ACCOUNT_LOCKED": {
+    "CODE": 1010,
+    "MESSAGE": {
+      "VI": "Tài khoản của bạn đã bị khóa",
+      "EN": "Your account was locked"
+    }
+  },
+  "PASSWORD_INCORRECT": {
+    "CODE": 1011,
+    "MESSAGE": {
+      "VI": "Mật khẩu không chính xác",
+      "EN": "Your password incorrect"
+    }
+  },
+  "REFUND_AMOUNT_EXCEEDED": {
+    "CODE": 1012,
+    "MESSAGE": {
+      "VI": "Số tiền hoàn lại vượt quá mức cho phép",
+      "EN": "Refund amount exceeded"
+    }
+  }
+}

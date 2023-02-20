@@ -1,0 +1,58 @@
+{
+  "SUCCESS": {
+    "CODE": 0,
+    "MESSAGE": {
+      "VI": "Giao dịch thành công",
+      "EN": "Successful"
+    }
+  },
+  "IN_PROCESSING_OR_NOT_PAID": {
+    "CODE": 9,
+    "MESSAGE": {
+      "VI": "Giao dịch đang tiến hành hoặc chưa thanh toán",
+      "EN": "Giao dịch đang tiến hành hoặc chưa thanh toán"
+    }
+  },
+  "PENDING": {
+    "CODE": 99,
+    "MESSAGE": {
+      "VI": "Giao dịch pending",
+      "EN": "Giao dịch pending"
+    }
+  },
+  "SIGNATURE_INVALID": {
+    "CODE": 98,
+    "MESSAGE": {
+      "VI": "Chữ ký không hợp lệ",
+      "EN": "Chữ ký không hợp lệ"
+    }
+  },
+  "BANK_REJECT": {
+    "CODE": 1,
+    "MESSAGE": {
+      "VI": "Giao dịch không thành công. Ngân hàng phát hành thẻ từ chối cấp phép cho giao dịch. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ để biết chính xác nguyên nhân Ngân hàng từ chối",
+      "EN": "Giao dịch không thành công. Ngân hàng phát hành thẻ từ chối cấp phép cho giao dịch. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ để biết chính xác nguyên nhân Ngân hàng từ chối"
+    }
+  },
+  "TIME_EXPIRED": {
+    "CODE": 17,
+    "MESSAGE": {
+      "VI": "Giao dịch không thành công. Quá thời gian thanh toán. Vui lòng thực hiện thanh toán lại",
+      "EN": "Giao dịch không thành công. Quá thời gian thanh toán. Vui lòng thực hiện thanh toán lại"
+    }
+  },
+  "USER_CANCEL": {
+    "CODE": 18,
+    "MESSAGE": {
+      "VI": "Giao dịch không thành công. Người sử dụng hủy giao dịch",
+      "EN": "Giao dịch không thành công. Người sử dụng hủy giao dịch"
+    }
+  },
+  "PAYMENT_GW_NOT_APPROVED": {
+    "CODE": 30,
+    "MESSAGE": {
+      "VI": "Thông tin tích hợp cổng thanh toán chưa được duyệt",
+      "EN": "Payment gateway info not approved"
+    }
+  }
+}

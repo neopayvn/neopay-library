@@ -1,0 +1,18 @@
+{
+  "SUCCESS": {
+    "CODE": 1,
+    "MESSAGE": {
+      "VI": "Thành công",
+      "EN": "Successful"
+    },
+    "STATUS_CODE": 200
+  },
+  "FAILED": {
+    "CODE": 2,
+    "MESSAGE": {
+      "VI": "Thất bại",
+      "EN": "Process failed"
+    },
+    "STATUS_CODE": 500
+  }
+}
