@@ -17,7 +17,13 @@ class MongoFuncHelper {
 	 * @param newObj object entity model was set value need to update
 	 * */
 	async $updateOne(model, conditionObj, newObj) {
-		return await model.updateOne(conditionObj, newObj);
+		const result = await model.updateOne(conditionObj, newObj);
+		/** Wrapper data return from version 6 to old version which services using */
+		return {
+			ok: result.acknowledged ? 1 : 0,
+			n: result.matchedCount,
+			nModified: result.modifiedCount,
+		}
 	}
 
 	/** Update entity model
@@ -27,7 +33,13 @@ class MongoFuncHelper {
 	 * @param setObj object entity model was set value need to update
 	 * */
 	async $updateSet(model, filterObj, setObj) {
-		return await model.updateOne(filterObj, setObj);
+		const result = await model.updateOne(filterObj, setObj);
+		/** Wrapper data return from version 6 to old version 5 which services using */
+		return {
+			ok: result.acknowledged ? 1 : 0,
+			n: result.matchedCount,
+			nModified: result.modifiedCount,
+		}
 	}
 
 	/** Since upsert creates a document if not finds a document, you don't need to create another one manually.
@@ -236,7 +248,13 @@ class MongoFuncHelper {
 	 * @param _id is _id of entity model need to get
 	 * @param isActive is value need to update*/
 	async $setIsActive(model, _id, isActive) {
-		return await model.updateOne({_id}, {$set: {isActive}});
+		const result = await model.updateOne({_id}, {$set: {isActive}});
+		/** Wrapper data return from version 6 to old version 5 which services using */
+		return {
+			ok: result.acknowledged ? 1 : 0,
+			n: result.matchedCount,
+			nModified: result.modifiedCount,
+		}
 	}
 
 	/** Set isDelete prop of a entity model
@@ -245,7 +263,13 @@ class MongoFuncHelper {
 	 * @param _id is _id of entity model need to get
 	 * @param isDelete is value need to update*/
 	async $setIsDelete(model, _id, isDelete) {
-		return await model.updateOne({_id}, {$set: {isDelete}});
+		const result = await model.updateOne({_id}, {$set: {isDelete}});
+		/** Wrapper data return from version 6 to old version 5 which services using */
+		return {
+			ok: result.acknowledged ? 1 : 0,
+			n: result.matchedCount,
+			nModified: result.modifiedCount,
+		}
 	}
 
 	/** Get a entity model via code prop
@@ -302,7 +326,13 @@ class MongoFuncHelper {
 	 * @param setObj object update
 	 * @param options object*/
 	async $updateMany(model, filterObj, setObj, options = {}) {
-		return model.updateMany(filterObj, setObj, options);
+		const result = model.updateMany(filterObj, setObj, options);
+		/** Wrapper data return from version 6 to old version which services using */
+		return {
+			ok: result.acknowledged ? 1 : 0,
+			n: result.matchedCount,
+			nModified: result.modifiedCount,
+		}
 	}
 
 	/** Convert value to mongoId
@@ -324,7 +354,13 @@ class MongoFuncHelper {
 	 * @param setObj object update
 	 * @param options object: {arrayFilters = []} */
 	async $findOneAndUpdate(model, filterObj, setObj, options = {}) {
-		return model.findOneAndUpdate(filterObj, setObj, options);
+		const result = await model.findOneAndUpdate(filterObj, setObj, options);
+		/** Wrapper data return from version 6 to old version 5 which services using */
+		return {
+			ok: result.acknowledged ? 1 : 0,
+			n: result.matchedCount,
+			nModified: result.modifiedCount,
+		}
 	}
 
 	/** Delete many entity model
@@ -333,7 +369,9 @@ class MongoFuncHelper {
 	 * @param filterObj object filter
 	 * @param options */
 	async $deleteMany(model, filterObj, options = {}) {
-		return model.deleteMany(filterObj, options);
+		const result = await model.deleteMany(filterObj, options);
+		/** Wrapper data return from version 6 to old version which services using */
+		return { n: result.acknowledged ? 1 : 0, ok: result.acknowledged ? 1 : 0, deletedCount: result.deletedCount };
 	}
 
 	/** Delete one entity model
@@ -342,7 +380,9 @@ class MongoFuncHelper {
 	 * @param options
 	 * @param filterObj object filter */
 	async $deleteOne(model, filterObj, options = {}) {
-		return model.deleteOne(filterObj, options);
+		const result = await model.deleteOne(filterObj, options);
+		/** Wrapper data return from version 6 to old version which services using */
+		return { n: result.acknowledged ? 1 : 0, ok: result.acknowledged ? 1 : 0, deletedCount: result.deletedCount };
 	}
 
 	async $distinct(model, field, filterObj = {}) {
