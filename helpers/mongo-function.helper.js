@@ -226,7 +226,7 @@ class MongoFuncHelper {
 	 * @param aggregateFilters is array contains query aggregate props
 	 * @param options is object as: {page, limit, sort}*/
 	async $aggregatePaging(model, aggregateFilters = [], options = {page: 1, limit: 10}) {
-		const aggregate = model.aggregate(aggregateFilters);
+		const aggregate = await model.aggregate(aggregateFilters);
 		return model.aggregatePaginate(aggregate, options);
 	}
 
@@ -316,7 +316,7 @@ class MongoFuncHelper {
 	 * @param model current model working
 	 * @param listItem list object entity model need to create*/
 	async $saveMany(model, listItem) {
-		return model.insertMany(listItem);
+		return await model.insertMany(listItem);
 	}
 
 	/** Update many entity model
@@ -326,7 +326,7 @@ class MongoFuncHelper {
 	 * @param setObj object update
 	 * @param options object*/
 	async $updateMany(model, filterObj, setObj, options = {}) {
-		const result = model.updateMany(filterObj, setObj, options);
+		const result = await model.updateMany(filterObj, setObj, options);
 		/** Wrapper data return from version 6 to old version which services using */
 		return {
 			ok: result.acknowledged ? 1 : 0,
@@ -354,13 +354,8 @@ class MongoFuncHelper {
 	 * @param setObj object update
 	 * @param options object: {arrayFilters = []} */
 	async $findOneAndUpdate(model, filterObj, setObj, options = {}) {
-		const result = await model.findOneAndUpdate(filterObj, setObj, options);
-		/** Wrapper data return from version 6 to old version 5 which services using */
-		return {
-			ok: result.acknowledged ? 1 : 0,
-			n: result.matchedCount,
-			nModified: result.modifiedCount,
-		}
+		// FindOneAndUpdate result affected by caller via property options
+		return await model.findOneAndUpdate(filterObj, setObj, options);
 	}
 
 	/** Delete many entity model
