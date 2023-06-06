@@ -9,7 +9,6 @@ class LoggerHelper {
     if (!_.isEmpty(logObject.params) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
       logObject.params = this.processMaskingFields(logObject.params, logObject.maskingFields);
     }
-    logParamObj = this.processIgnoreFields(reqObj.params, reqObj.maskingFields);
     return `AC ${logObject.prototype} ${logObject.clientIP} ${logObject.correlationId} ${new Date(logObject.requestTime).toISOString()}` +
         ` ${logObject.userName} ${logObject.method} ${logObject.url} ${logObject.action} ${JSON.stringify(logObject.params)}`;
   }
