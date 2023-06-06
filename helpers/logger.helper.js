@@ -2,47 +2,52 @@ const _ = require("lodash");
 
 class LoggerHelper {
   getFormatLogGwAC(reqObj) {
-    if (!reqObj.ignoreFields || reqObj.ignoreFields.length < 1 || !reqObj.params || _.isEmpty(reqObj.params)) {
-      return `AC ${reqObj.prototype} ${reqObj.clientIP} ${reqObj.correlationId} ${new Date(reqObj.requestTime).toISOString()}` +
-        ` ${reqObj.userName} ${reqObj.method} ${reqObj.url} ${reqObj.action} ${JSON.stringify(reqObj.params)}`;
+    const logObject = JSON.parse(JSON.stringify(reqObj));
+    if (!_.isEmpty(logObject.params) && !_.isEmpty(logObject.ignoreFields) && Array.isArray(logObject.ignoreFields) && logObject.ignoreFields.length > 0) {
+      logObject.params = this.processIgnoreFields(logObject.params, logObject.ignoreFields);
     }
-    let logParamObj = this.processIgnoreFields(JSON.parse(JSON.stringify(reqObj.params)), reqObj.ignoreFields);
-    logParamObj = this.processMaskingFields(JSON.parse(JSON.stringify(reqObj.params)), reqObj.maskingFields);
-    return `AC ${reqObj.prototype} ${reqObj.clientIP} ${reqObj.correlationId} ${new Date(reqObj.requestTime).toISOString()}` +
-      ` ${reqObj.userName} ${reqObj.method} ${reqObj.url} ${reqObj.action} ${JSON.stringify(logParamObj)}`;
+    if (!_.isEmpty(logObject.params) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
+      logObject.params = this.processMaskingFields(logObject.params, logObject.maskingFields);
+    }
+    logParamObj = this.processIgnoreFields(reqObj.params, reqObj.maskingFields);
+    return `AC ${logObject.prototype} ${logObject.clientIP} ${logObject.correlationId} ${new Date(logObject.requestTime).toISOString()}` +
+        ` ${logObject.userName} ${logObject.method} ${logObject.url} ${logObject.action} ${JSON.stringify(logObject.params)}`;
   }
 
   getFormatLogGwOUT(resObj) {
-    if (!resObj.ignoreFields || resObj.ignoreFields.length < 1 || !resObj.data || _.isEmpty(resObj.data)) {
-      return `OU ${resObj.prototype} ${resObj.clientIP} ${resObj.correlationId} ${new Date(resObj.requestTime).toISOString()}` +
-        ` ${resObj.userName} ${resObj.method} ${resObj.url} ${resObj.action} ${JSON.stringify(resObj.data)}`;
+    const logObject = JSON.parse(JSON.stringify(resObj));
+    if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.ignoreFields) && Array.isArray(logObject.ignoreFields) && logObject.ignoreFields.length > 0) {
+      logObject.data = this.processIgnoreFields(logObject.params, logObject.ignoreFields);
     }
-    let logDataObj = this.processIgnoreFields(JSON.parse(JSON.stringify(resObj.data)), resObj.ignoreFields);
-    logDataObj = this.processMaskingFields(JSON.parse(JSON.stringify(resObj.data)), resObj.maskingFields);
-    return `OU ${resObj.prototype} ${resObj.clientIP} ${resObj.correlationId} ${new Date(resObj.requestTime).toISOString()}` +
-      ` ${resObj.userName} ${resObj.method} ${resObj.url} ${resObj.action} ${JSON.stringify(logDataObj)}`;
+    if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
+      logObject.data = this.processMaskingFields(logObject.params, logObject.maskingFields);
+    }
+    return `OU ${logObject.prototype} ${logObject.clientIP} ${logObject.correlationId} ${new Date(logObject.requestTime).toISOString()}` +
+        ` ${logObject.userName} ${logObject.method} ${logObject.url} ${logObject.action} ${JSON.stringify(logObject.data)}`;
   }
 
   getFormatLogSvIN(inObj) {
-    if (!inObj.ignoreFields || inObj.ignoreFields.length < 1 || !inObj.params || _.isEmpty(inObj.params)) {
-      return `IN ${inObj.clientIP} ${inObj.correlationId} ${inObj.requestTime}`
-        + ` ${inObj.caller} ${inObj.userName} ${inObj.action} ${JSON.stringify(inObj.params)}`;
+    const logObject = JSON.parse(JSON.stringify(inObj));
+    if (!_.isEmpty(logObject.params) && !_.isEmpty(logObject.ignoreFields) && Array.isArray(logObject.ignoreFields) && logObject.ignoreFields.length > 0) {
+      logObject.params = this.processIgnoreFields(logObject.params, logObject.ignoreFields);
     }
-    let logInObj = this.processIgnoreFields(JSON.parse(JSON.stringify(inObj.params), inObj.ignoreFields));
-    logInObj = this.processMaskingFields(JSON.parse(JSON.stringify(inObj.params), inObj.maskingFields));
-    return `IN ${inObj.clientIP} ${inObj.correlationId} ${inObj.requestTime}`
-      + ` ${inObj.caller} ${inObj.userName} ${inObj.action} ${JSON.stringify(logInObj)}`;
+    if (!_.isEmpty(logObject.params) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
+      logObject.params = this.processMaskingFields(logObject.params, logObject.maskingFields);
+    }
+    return `IN ${logObject.clientIP} ${logObject.correlationId} ${logObject.requestTime}`
+    + ` ${logObject.caller} ${logObject.userName} ${logObject.action} ${JSON.stringify(logObject.params)}`;
   }
 
   getFormatLogSvOUT(outObj) {
-    if (!outObj.ignoreFields || outObj.ignoreFields.length < 1 || !outObj.data || _.isEmpty(outObj.data)) {
-      return `OUT ${outObj.clientIP} ${outObj.correlationId} ${outObj.requestTime}`
-        + ` ${outObj.caller} ${outObj.userName} ${outObj.action} ${JSON.stringify(outObj.data)}`;
+    const logObject = JSON.parse(JSON.stringify(outObj));
+    if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.ignoreFields) && Array.isArray(logObject.ignoreFields) && logObject.ignoreFields.length > 0) {
+      logObject.data = this.processIgnoreFields(logObject.params, logObject.ignoreFields);
     }
-    let logOutObj = this.processIgnoreFields(JSON.parse(JSON.stringify(outObj.data), outObj.ignoreFields));
-    logOutObj = this.processMaskingFields(JSON.parse(JSON.stringify(outObj.data), outObj.maskingFields));
-    return `OUT ${outObj.clientIP} ${outObj.correlationId} ${outObj.requestTime}`
-      + ` ${outObj.caller} ${outObj.userName} ${outObj.action} ${JSON.stringify(logOutObj)}`;
+    if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
+      logObject.data = this.processMaskingFields(logObject.params, logObject.maskingFields);
+    }
+    return `OUT ${logObject.clientIP} ${logObject.correlationId} ${logObject.requestTime}`
+      + ` ${logObject.caller} ${logObject.userName} ${logObject.action} ${JSON.stringify(logObject.data)}`;
   }
 
   /** Process hide secret value */
