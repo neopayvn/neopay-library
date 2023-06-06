@@ -47,20 +47,22 @@ class LoggerHelper {
 
   /** Process hide secret value */
   processIgnoreFields(objProc, ignoreFields) {
+    const objectToProccess = JSON.parse(JSON.stringify(objProc));
     if (!ignoreFields || ignoreFields.length < 1) {
-      return objProc;
+      return objectToProccess;
     }
     ignoreFields.map(fieldKey => {
-      const valueIgnore = _.get(objProc, fieldKey);
+      const valueIgnore = _.get(objectToProccess, fieldKey);
       if (!valueIgnore || _.isEmpty(valueIgnore)) {
         return fieldKey;
       }
-      _.set(objProc, fieldKey, "*********");
+      _.set(objectToProccess, fieldKey, "*********");
     });
-    return objProc;
+    return objectToProccess;
   }
 
-  processMaskingFields(objectToProccess, maskingFields) {
+  processMaskingFields(objProc, maskingFields) {
+    const objectToProccess = JSON.parse(JSON.stringify(objProc));
     if (!maskingFields || maskingFields.length < 1) {
       return objectToProccess;
     }
@@ -73,7 +75,7 @@ class LoggerHelper {
         }
         switch (maskType) {
           case "BANK_CARD":
-            _.set(objectToProccess, field, maskValue.replace(maskValue.substring(6,maskValue.length-4), '*'.repeat(maskValue.length-10)));
+            _.set(objectToProccess, field, maskValue.slice(0, 6).padEnd(maskValue.length - 4, "*").concat(maskValue.slice(-4)));
             break;
           case "FULL":
             _.set(objectToProccess, field, '*'.repeat(maskValue.length));
