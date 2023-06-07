@@ -81,6 +81,9 @@ class LoggerHelper {
           case "BANK_CARD":
             _.set(objectToProccess, field, maskValue.slice(0, 6).padEnd(maskValue.length - 4, "*").concat(maskValue.slice(-4)));
             break;
+          case "SECRET":
+            _.set(objectToProccess, field, '*'.repeat(maskValue.length -6).concat(maskValue.slice(-6)));
+            break;
           case "FULL":
             _.set(objectToProccess, field, '*'.repeat(maskValue.length));
             break;
