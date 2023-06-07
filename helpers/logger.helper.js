@@ -16,10 +16,10 @@ class LoggerHelper {
   getFormatLogGwOUT(resObj) {
     const logObject = JSON.parse(JSON.stringify(resObj));
     if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.ignoreFields) && Array.isArray(logObject.ignoreFields) && logObject.ignoreFields.length > 0) {
-      logObject.data = this.processIgnoreFields(logObject.params, logObject.ignoreFields);
+      logObject.data = this.processIgnoreFields(logObject.data, logObject.ignoreFields);
     }
     if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
-      logObject.data = this.processMaskingFields(logObject.params, logObject.maskingFields);
+      logObject.data = this.processMaskingFields(logObject.data, logObject.maskingFields);
     }
     return `OU ${logObject.prototype} ${logObject.clientIP} ${logObject.correlationId} ${new Date(logObject.requestTime).toISOString()}` +
         ` ${logObject.userName} ${logObject.method} ${logObject.url} ${logObject.action} ${JSON.stringify(logObject.data)}`;
@@ -40,10 +40,10 @@ class LoggerHelper {
   getFormatLogSvOUT(outObj) {
     const logObject = JSON.parse(JSON.stringify(outObj));
     if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.ignoreFields) && Array.isArray(logObject.ignoreFields) && logObject.ignoreFields.length > 0) {
-      logObject.data = this.processIgnoreFields(logObject.params, logObject.ignoreFields);
+      logObject.data = this.processIgnoreFields(logObject.data, logObject.ignoreFields);
     }
     if (!_.isEmpty(logObject.data) && !_.isEmpty(logObject.maskingFields) && Array.isArray(logObject.maskingFields) && logObject.maskingFields.length > 0) {
-      logObject.data = this.processMaskingFields(logObject.params, logObject.maskingFields);
+      logObject.data = this.processMaskingFields(logObject.data, logObject.maskingFields);
     }
     return `OUT ${logObject.clientIP} ${logObject.correlationId} ${logObject.requestTime}`
       + ` ${logObject.caller} ${logObject.userName} ${logObject.action} ${JSON.stringify(logObject.data)}`;
