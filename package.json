@@ -1,6 +1,6 @@
 {
   "name": "neopay-library",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "NeoPay Library",
   "main": "index.js",
   "dependencies": {
