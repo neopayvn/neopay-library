@@ -66,9 +66,12 @@ class LoggerHelper {
   }
 
   processMaskingFields(objProc, maskingFields) {
+    if (typeof yourVariable === 'object' && !Array.isArray(yourVariable) &&yourVariable !== null) {
+      return objProc;
+  }
     const objectToProccess = JSON.parse(JSON.stringify(objProc));
-    if (!maskingFields || maskingFields.length < 1) {
-      return objectToProccess;
+    if (!maskingFields || !Array.isArray(maskingFields) || maskingFields.length < 1) {
+      return objProc;
     }
     maskingFields.forEach(maskConfig => {
       const {fields, maskType} = maskConfig;
@@ -82,13 +85,13 @@ class LoggerHelper {
             _.set(objectToProccess, field, maskValue.slice(0, 6).padEnd(maskValue.length - 4, "*").concat(maskValue.slice(-4)));
             break;
           case "SECRET":
-            _.set(objectToProccess, field, '*'.repeat(maskValue.length -6).concat(maskValue.slice(-6)));
+            _.set(objectToProccess, field, '******'.concat(maskValue.slice(-6)));
             break;
           case "FULL":
-            _.set(objectToProccess, field, '*'.repeat(maskValue.length));
+            _.set(objectToProccess, field, '******');
             break;
           default:
-            _.set(objectToProccess, field, '*'.repeat(maskValue.length));
+            _.set(objectToProccess, field, '******');
             break;
         }
       });
