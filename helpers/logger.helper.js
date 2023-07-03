@@ -23,7 +23,7 @@ class LoggerHelper {
     }
     const result = `OU ${logObject.prototype} ${logObject.clientIP} ${logObject.correlationId} ${new Date(logObject.requestTime).toISOString()}` +
     ` ${logObject.userName} ${logObject.method} ${logObject.url} ${logObject.action} ${JSON.stringify(logObject.data)}`;
-    return result.slice(0, 500);
+    return result.length > 500 ? result.slice(0, 500) + "..." : result;
   }
 
   getFormatLogSvIN(inObj) {
@@ -48,7 +48,7 @@ class LoggerHelper {
     }
     const result = `OUT ${logObject.clientIP} ${logObject.correlationId} ${logObject.requestTime}`
     + ` ${logObject.caller} ${logObject.userName} ${logObject.action} ${JSON.stringify(logObject.data)}`;
-    return result.slice(0, 500);
+    return result.length > 500 ? result.slice(0, 500) + "..." : result;
   }
 
   /** Process hide secret value */
