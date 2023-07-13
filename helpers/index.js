@@ -6,6 +6,7 @@ const FunctionHelper = require("./function.helper");
 const EncryptHelper = require("./encrypt.helper");
 const SqlFuncHelper = require("./sql-function.helper");
 const LoggerHelper = require("./logger.helper");
+const HashicorpVaultHelper = require("./hashicorp-vault.helper");
 
 module.exports = {
 	MapperHelper: new MapperHelper(),
@@ -16,4 +17,5 @@ module.exports = {
 	EncryptHelper: new EncryptHelper(),
 	SqlFuncHelper: new SqlFuncHelper(),
 	LoggerHelper: new LoggerHelper(),
+	HashicorpVaultHelper: new HashicorpVaultHelper(),
 };
