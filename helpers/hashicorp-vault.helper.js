@@ -22,13 +22,13 @@ class HashicorpVaultHelper {
 			});
 			return {
 				status: "SUCCESS", 
-				data: secretData?.data?.data?.data || {},
+				data: secretData?.data?.data?.data || null,
 			};
 		}
 		catch(error) {
 			return {
 				status: "FAILED", 
-				data: {},
+				data: null,
 				error: error?.response?.data || error?.message
 			}
 		}
