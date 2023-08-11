@@ -334,9 +334,9 @@ class FunctionHelper {
 	 * @param params array value or string value */
 	convertToMongoId(params) {
 		if (_.isArray(params)) {
-			return params.map((id) => mongoose.Types.ObjectId(id));
+			return params.map((id) => new mongoose.Types.ObjectId(id));
 		} if (_.isString(params)) {
-			return mongoose.Types.ObjectId(params);
+			return new mongoose.Types.ObjectId(params);
 		}
 		return params;
 	}
